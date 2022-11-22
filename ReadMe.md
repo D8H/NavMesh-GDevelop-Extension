@@ -1,4 +1,4 @@
-This project allow to build a NavMesh path finding extension for [GDevelop](https://gdevelop.io/).
+This project allows to build a NavMesh path finding extension for [GDevelop](https://gdevelop.io/).
 
 It uses:
 - a NavMesh generator library [D8H/NavMeshGenerator](https://github.com/D8H/NavMeshGenerator)

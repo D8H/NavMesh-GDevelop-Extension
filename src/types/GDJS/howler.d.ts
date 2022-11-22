@@ -16,20 +16,20 @@ declare interface SoundSpriteDefinitions {
   [name: string]: [number, number] | [number, number, boolean];
 }
 
-type HowlErrorEvent = 'playerror' | 'loaderror';
+type HowlErrorEvent = "playerror" | "loaderror";
 
 type HowlBaseEvent =
-  | 'load'
-  | 'play'
-  | 'end'
-  | 'pause'
-  | 'stop'
-  | 'mute'
-  | 'volume'
-  | 'rate'
-  | 'seek'
-  | 'fade'
-  | 'unlock';
+  | "load"
+  | "play"
+  | "end"
+  | "pause"
+  | "stop"
+  | "mute"
+  | "volume"
+  | "rate"
+  | "seek"
+  | "fade"
+  | "unlock";
 
 type HowlEvent = HowlBaseEvent | HowlErrorEvent;
 
@@ -141,7 +141,7 @@ declare interface HowlOptions extends HowlListeners {
    *
    * @default `true`
    */
-  preload?: boolean | 'metadata';
+  preload?: boolean | "metadata";
 
   /**
    * Set to true to automatically start playback when sound is loaded.
@@ -210,7 +210,7 @@ declare interface HowlOptions extends HowlListeners {
 declare class Howl {
   constructor(options: HowlOptions);
 
-  play(id?: number | '__default'): number; // .play() is not chainable; the other methods are
+  play(id?: number | "__default"): number; // .play() is not chainable; the other methods are
   pause(id?: number): this;
   stop(id?: number): this;
 
@@ -238,21 +238,21 @@ declare class Howl {
 
   playing(id?: number): boolean;
   duration(id?: number): number;
-  state(): 'unloaded' | 'loading' | 'loaded';
+  state(): "unloaded" | "loading" | "loaded";
   load(): this;
   unload(): void;
 
-  on(event: 'load', callback: () => void, id?: number): this;
+  on(event: "load", callback: () => void, id?: number): this;
   on(event: HowlErrorEvent, callback: HowlErrorCallback, id?: number): this;
   on(event: HowlBaseEvent, callback: HowlBaseCallback, id?: number): this;
   on(event: string, callback: HowlCallback, id?: number): this;
 
-  once(event: 'load', callback: () => void, id?: number): this;
+  once(event: "load", callback: () => void, id?: number): this;
   once(event: HowlErrorEvent, callback: HowlErrorCallback, id?: number): this;
   once(event: HowlBaseEvent, callback: HowlBaseCallback, id?: number): this;
   once(event: string, callback: HowlCallback, id?: number): this;
 
-  off(event: 'load', callback?: () => void, id?: number): this;
+  off(event: "load", callback?: () => void, id?: number): this;
   off(event: HowlErrorEvent, callback?: HowlErrorCallback, id?: number): this;
   off(event: HowlBaseEvent, callback?: HowlBaseCallback, id?: number): this;
   off(event?: string, callback?: HowlCallback, id?: number): this;
@@ -273,9 +273,9 @@ declare class Howl {
       coneInnerAngle?: number;
       coneOuterAngle?: number;
       coneOuterGain?: number;
-      distanceModel: 'inverse' | 'linear';
+      distanceModel: "inverse" | "linear";
       maxDistance: number;
-      panningModel: 'HRTF' | 'equalpower';
+      panningModel: "HRTF" | "equalpower";
       refDistance: number;
       rolloffFactor: number;
     },

@@ -1,5 +1,5 @@
 //@ts-ignore
-import * as PixiModule from 'pixi.js';
+import * as PixiModule from "pixi.js";
 
 declare global {
   /**

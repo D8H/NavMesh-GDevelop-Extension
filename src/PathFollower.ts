@@ -67,9 +67,7 @@ export class PathFollower {
     if (this._path.length === 0) {
       return 0;
     }
-    return (
-      this._path[this._path.length - 1][1]
-    );
+    return this._path[this._path.length - 1][1];
   }
 
   /**
@@ -129,8 +127,7 @@ export class PathFollower {
 
     // Update the time on the segment and change segment if needed
     // Use a Verlet integration to be frame rate independent.
-    this._distanceOnSegment +=
-      ((this._speed + previousSpeed) / 2) * timeDelta;
+    this._distanceOnSegment += ((this._speed + previousSpeed) / 2) * timeDelta;
     const remainingDistanceOnSegment =
       this._totalSegmentDistance - this._distanceOnSegment;
     if (
@@ -141,20 +138,24 @@ export class PathFollower {
       this._distanceOnSegment = -remainingDistanceOnSegment;
     }
   }
-  
+
   getX() {
-    return this._currentSegment < this._path.length - 1 ? gdjs.evtTools.common.lerp(
-      this._path[this._currentSegment][0],
-      this._path[this._currentSegment + 1][0],
-      this._distanceOnSegment / this._totalSegmentDistance
-    ) : this._path[this._path.length - 1][0];
+    return this._currentSegment < this._path.length - 1
+      ? gdjs.evtTools.common.lerp(
+          this._path[this._currentSegment][0],
+          this._path[this._currentSegment + 1][0],
+          this._distanceOnSegment / this._totalSegmentDistance
+        )
+      : this._path[this._path.length - 1][0];
   }
 
   getY() {
-    return this._currentSegment < this._path.length - 1 ? gdjs.evtTools.common.lerp(
-      this._path[this._currentSegment][1],
-      this._path[this._currentSegment + 1][1],
-      this._distanceOnSegment / this._totalSegmentDistance
-    ) : this._path[this._path.length - 1][1];
+    return this._currentSegment < this._path.length - 1
+      ? gdjs.evtTools.common.lerp(
+          this._path[this._currentSegment][1],
+          this._path[this._currentSegment + 1][1],
+          this._distanceOnSegment / this._totalSegmentDistance
+        )
+      : this._path[this._path.length - 1][1];
   }
 }

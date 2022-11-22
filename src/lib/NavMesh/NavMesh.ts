@@ -1,7 +1,13 @@
 import NavPoly from "./NavPoly";
 import NavGraph from "./NavGraph";
 import Channel from "./Channel";
-import { angleDifference, areCollinear, clamp, distanceSquared, projectPointToEdge } from "./Utils";
+import {
+  angleDifference,
+  areCollinear,
+  clamp,
+  distanceSquared,
+  projectPointToEdge,
+} from "./Utils";
 import Vector2 from "./Math/Vector2";
 import Line from "./Math/Line";
 import Polygon from "./Math/Polygon";
@@ -78,7 +84,10 @@ export default class NavMesh {
    * @param point
    * @param maxAllowableDist
    */
-  public findClosestMeshPoint(point: Vector2, maxAllowableDist: number = Number.POSITIVE_INFINITY) {
+  public findClosestMeshPoint(
+    point: Vector2,
+    maxAllowableDist: number = Number.POSITIVE_INFINITY
+  ) {
     let minDistance = maxAllowableDist;
     let closestPoly: NavPoly | null = null;
     let pointOnClosestPoly: Point | null = null;
@@ -104,7 +113,11 @@ export default class NavMesh {
         }
       }
     }
-    return { distance: minDistance, polygon: closestPoly, point: pointOnClosestPoly };
+    return {
+      distance: minDistance,
+      polygon: closestPoly,
+      point: pointOnClosestPoly,
+    };
   }
 
   /**
@@ -211,7 +224,10 @@ export default class NavMesh {
           portal = navPolygon.portals[i];
         }
       }
-      if (!portal) throw new Error("Path was supposed to be found, but portal is missing!");
+      if (!portal)
+        throw new Error(
+          "Path was supposed to be found, but portal is missing!"
+        );
 
       // Push the portal vertices into the channel
       channel.push(portal.start, portal.end);

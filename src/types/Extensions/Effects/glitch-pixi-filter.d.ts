@@ -1,2 +1,1 @@
-declare namespace gdjs {
-}
+declare namespace gdjs {}

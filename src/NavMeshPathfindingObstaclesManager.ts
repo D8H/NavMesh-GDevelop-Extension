@@ -25,24 +25,26 @@ export class NavMeshPathfindingObstaclesManager {
    * The navigation meshes by moving object size
    * (rounded on _cellSize)
    */
-   private _navMeshes: Map<integer, NavMesh> = new Map();
+  private _navMeshes: Map<integer, NavMesh> = new Map();
   /**
    * Used while NavMeshes update is disabled to remember to do the update
    * when it's enable back.
    */
-   private _navMeshesAreUpToDate = true;
+  private _navMeshesAreUpToDate = true;
   /**
    * This allows to continue finding paths with the old NavMeshes while
    * moving obstacles.
    */
-   private _navMeshesUpdateIsEnabled = true;
+  private _navMeshesUpdateIsEnabled = true;
 
-  constructor(instanceContainer: gdjs.RuntimeInstanceContainer, configuration: NavMeshPathfindingObstaclesManagerConfiguration) {
-
+  constructor(
+    instanceContainer: gdjs.RuntimeInstanceContainer,
+    configuration: NavMeshPathfindingObstaclesManagerConfiguration
+  ) {
     const viewpoint = configuration._getViewpoint();
-    if (viewpoint === 'Isometry 2:1 (26.565°)') {
+    if (viewpoint === "Isometry 2:1 (26.565°)") {
       configuration._setIsometricRatio(2);
-    } else if (viewpoint === 'True Isometry (30°)') {
+    } else if (viewpoint === "True Isometry (30°)") {
       configuration._setIsometricRatio(Math.sqrt(3));
     } else {
       configuration._setIsometricRatio(1);
@@ -80,7 +82,7 @@ export class NavMeshPathfindingObstaclesManager {
   /**
    * Get the obstacles manager of a scene.
    */
-   static getManager(
+  static getManager(
     instanceContainer: gdjs.RuntimeInstanceContainer
   ): NavMeshPathfindingObstaclesManager | null {
     // @ts-ignore
@@ -88,7 +90,8 @@ export class NavMeshPathfindingObstaclesManager {
   }
 
   static getManagerOrCreate(
-    instanceContainer: gdjs.RuntimeInstanceContainer, configuration: NavMeshPathfindingObstaclesManagerConfiguration
+    instanceContainer: gdjs.RuntimeInstanceContainer,
+    configuration: NavMeshPathfindingObstaclesManagerConfiguration
   ): NavMeshPathfindingObstaclesManager {
     // @ts-ignore
     if (!instanceContainer.navMeshPathfindingObstaclesManager) {
@@ -114,9 +117,7 @@ export class NavMeshPathfindingObstaclesManager {
   /**
    * Add a obstacle to the list of existing obstacles.
    */
-  addObstacle(
-    pathfindingObstacleBehavior: NavMeshPathfindingObstacleBehavior
-  ) {
+  addObstacle(pathfindingObstacleBehavior: NavMeshPathfindingObstacleBehavior) {
     this._obstacles.add(pathfindingObstacleBehavior.behavior.owner);
     this.invalidateNavMesh();
   }
@@ -168,8 +169,7 @@ export class NavMeshPathfindingObstaclesManager {
  * This is an allocation free iterable
  * that can only do one iteration at a time.
  */
-class PolygonIterableAdapter
-  implements Iterable<Iterable<Point>> {
+class PolygonIterableAdapter implements Iterable<Iterable<Point>> {
   objects: Iterable<gdjs.RuntimeObject>;
   objectsItr: Iterator<gdjs.RuntimeObject>;
   polygonsItr: IterableIterator<gdjs.Polygon>;
@@ -225,8 +225,7 @@ class PolygonIterableAdapter
  * This is an allocation free iterable
  * that can only do one iteration at a time.
  */
-class PointIterableAdapter
-  implements Iterable<Point> {
+class PointIterableAdapter implements Iterable<Point> {
   vertices: Iterable<FloatPoint>;
   verticesItr: Iterator<FloatPoint>;
   result: IteratorResult<Point, any>;

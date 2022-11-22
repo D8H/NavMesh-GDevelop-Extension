@@ -11,7 +11,7 @@ import GridNode from "./AStar/GridNode";
  * toString, isWall and getCost. See GPS test from astar repo for structure:
  * https://github.com/bgrins/javascript-astar/blob/master/test/tests.js
  */
- export default class NavPoly extends GridNode {
+export default class NavPoly extends GridNode {
   public id: number;
   public polygon: Polygon;
   public edges: Line[];

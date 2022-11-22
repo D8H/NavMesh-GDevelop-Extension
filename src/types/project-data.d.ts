@@ -34,11 +34,11 @@ declare type ObjectData = {
 };
 
 declare type VariableType =
-  | 'string'
-  | 'number'
-  | 'boolean'
-  | 'structure'
-  | 'array';
+  | "string"
+  | "number"
+  | "boolean"
+  | "structure"
+  | "array";
 
 /** Data representation of a GDevelop variable */
 declare type VariableData = Readonly<{
@@ -53,7 +53,7 @@ declare type VariableData = Readonly<{
 }>;
 
 /** A variable child of a container. Those always have a name. */
-declare type RootVariableData = Omit<VariableData, 'name'> & { name: string };
+declare type RootVariableData = Omit<VariableData, "name"> & { name: string };
 
 /** Properties to set up a behavior. */
 declare type BehaviorData = {
@@ -174,7 +174,7 @@ declare interface ProjectPropertiesData {
   orientation: string;
   packageName: string;
   projectFile: string;
-  scaleMode: 'linear' | 'nearest';
+  scaleMode: "linear" | "nearest";
   pixelsRounding: boolean;
   sizeOnStartupMode: string;
   useExternalSourceFiles: boolean;
@@ -235,9 +235,9 @@ declare interface ResourceData {
 }
 
 declare type ResourceKind =
-  | 'audio'
-  | 'image'
-  | 'font'
-  | 'video'
-  | 'json'
-  | 'bitmapFont';
+  | "audio"
+  | "image"
+  | "font"
+  | "video"
+  | "json"
+  | "bitmapFont";

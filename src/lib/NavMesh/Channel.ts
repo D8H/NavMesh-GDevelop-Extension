@@ -50,7 +50,10 @@ export default class Channel {
 
       // Update right vertex.
       if (triarea2(portalApex, portalRight, right) <= 0.0) {
-        if (portalApex.equals(portalRight) || triarea2(portalApex, portalLeft, right) > 0.0) {
+        if (
+          portalApex.equals(portalRight) ||
+          triarea2(portalApex, portalLeft, right) > 0.0
+        ) {
           // Tighten the funnel.
           portalRight = right;
           rightIndex = i;
@@ -77,7 +80,10 @@ export default class Channel {
 
       // Update left vertex.
       if (triarea2(portalApex, portalLeft, left) >= 0.0) {
-        if (portalApex.equals(portalLeft) || triarea2(portalApex, portalRight, left) < 0.0) {
+        if (
+          portalApex.equals(portalLeft) ||
+          triarea2(portalApex, portalRight, left) < 0.0
+        ) {
           // Tighten the funnel.
           portalLeft = left;
           leftIndex = i;
@@ -103,7 +109,10 @@ export default class Channel {
       }
     }
 
-    if (pts.length === 0 || !pts[pts.length - 1].equals(portals[portals.length - 1].left)) {
+    if (
+      pts.length === 0 ||
+      !pts[pts.length - 1].equals(portals[portals.length - 1].left)
+    ) {
       // Append last point to path.
       pts.push(portals[portals.length - 1].left);
     }

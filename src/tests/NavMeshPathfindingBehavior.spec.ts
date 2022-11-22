@@ -6,10 +6,11 @@ import { MockedNavMeshPathfindingRuntimeBehavior } from "./mock/MockedNavMeshPat
 import { MockedRuntimeBehavior } from "./mock/MockedRuntimeBehavior";
 import { MockedRuntimeObject } from "./mock/MockedRuntimeObject";
 
-describe('gdjs.NavMeshPathfindingBehavior', function () {
+describe("gdjs.NavMeshPathfindingBehavior", function () {
   const epsilon = 1 / (2 << 16);
 
-  const createPlayerBehavior = (): gdjs.RuntimeBehavior & NavMeshPathfindingConfiguration => {
+  const createPlayerBehavior = (): gdjs.RuntimeBehavior &
+    NavMeshPathfindingConfiguration => {
     const player = new MockedRuntimeObject();
     player.setCustomWidthAndHeight(90, 90);
     player.setCustomCenter(45, 45);
@@ -21,30 +22,39 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
       angleOffset: 0,
       extraBorder: 0,
       collisionShape: "Bounding disk",
-    })
+    });
     //@ts-ignore
     return behavior;
   };
 
-  const createObstacleBehavior = (): [gdjs.RuntimeObject, NavMeshPathfindingObstacleBehavior] => {
+  const createObstacleBehavior = (): [
+    gdjs.RuntimeObject,
+    NavMeshPathfindingObstacleBehavior
+  ] => {
     const obstacle = new MockedRuntimeObject();
     obstacle.setCustomWidthAndHeight(100, 100);
-    const behavior = new MockedNavMeshPathfindingObstacleRuntimeBehavior(obstacle, {
-      viewpoint: 'Top-Down',
-      areaLeftBound: 0,
-      areaTopBound: 0,
-      areaRightBound: 1280,
-      areaBottomBound: 800,
-      cellSize: 20,
-    })
+    const behavior = new MockedNavMeshPathfindingObstacleRuntimeBehavior(
+      obstacle,
+      {
+        viewpoint: "Top-Down",
+        areaLeftBound: 0,
+        areaTopBound: 0,
+        areaRightBound: 1280,
+        areaBottomBound: 800,
+        cellSize: 20,
+      }
+    );
     //@ts-ignore
-    const pathObstacle = new NavMeshPathfindingObstacleBehavior(runtimeScene, behavior);
+    const pathObstacle = new NavMeshPathfindingObstacleBehavior(
+      runtimeScene,
+      behavior
+    );
     //@ts-ignore
     return [obstacle, pathObstacle];
   };
 
   let runtimeScene: gdjs.RuntimeInstanceContainer;
-  
+
   let playerBehavior: gdjs.RuntimeBehavior & NavMeshPathfindingConfiguration;
   let pathFinding: NavMeshPathfindingBehavior;
   let player: gdjs.RuntimeObject;
@@ -56,14 +66,14 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
     player = playerBehavior.owner;
   });
 
-  it('can find a path without any obstacle at all', function () {
+  it("can find a path without any obstacle at all", function () {
     player.setPosition(200, 300);
     pathFinding.moveTo(runtimeScene, 900, 300);
     expect(pathFinding.pathFound()).to.be(true);
     expect(pathFinding.pathFollower.getNodeCount()).to.be(2);
   });
 
-  it('can find a path without any obstacle in the way', function () {
+  it("can find a path without any obstacle in the way", function () {
     const [obstacle, obstacleBehavior] = createObstacleBehavior();
 
     obstacle.setPosition(600, 600);
@@ -88,7 +98,7 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
     expect(pathFinding.pathFound()).to.be(false);
   });
 
-  it('can find a path with an obstacle in the way', function () {
+  it("can find a path with an obstacle in the way", function () {
     const [obstacle, obstacleBehavior] = createObstacleBehavior();
 
     obstacle.setPosition(600, 300);
@@ -101,7 +111,7 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
     expect(pathFinding.pathFollower.getNodeCount()).to.be.above(2);
   });
 
-  it('can find a path between 2 obstacles', function () {
+  it("can find a path between 2 obstacles", function () {
     const [topObstacle, topObstacleBehavior] = createObstacleBehavior();
     const [bottomObstacle, bottomObstacleBehavior] = createObstacleBehavior();
 
@@ -145,29 +155,25 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
 
   [20, 30, 60, 120].forEach((framePerSecond) => {
     describe(`(${framePerSecond} fps)`, function () {
-      it('can move on the path at the right speed', function () {
+      it("can move on the path at the right speed", function () {
         //@ts-ignore
         player.setElapsedTime(1000 / framePerSecond);
-        
+
         const [obstacle, obstacleBehavior] = createObstacleBehavior();
 
         obstacle.setPosition(600, 300);
         // To ensure obstacles are registered.
-       obstacleBehavior.doStepPreEvents(runtimeScene);
+        obstacleBehavior.doStepPreEvents(runtimeScene);
 
         player.setPosition(200, 300);
         pathFinding.moveTo(runtimeScene, 900, 300);
         expect(pathFinding.pathFound()).to.be(true);
-        expect(pathFinding.pathFollower.getNodeCount()).to.be.above(
-          2
-        );
+        expect(pathFinding.pathFollower.getNodeCount()).to.be.above(2);
 
         // Move on the path and stop before the last 1/10 of second.
         for (let i = 0; i < (framePerSecond * 41) / 10; i++) {
           pathFinding.doStepPreEvents(runtimeScene);
-          expect(
-            pathFinding.pathFollower.destinationReached()
-          ).to.be(false);
+          expect(pathFinding.pathFollower.destinationReached()).to.be(false);
         }
         // The position is the same no matter the frame rate.
         expect(player.getX()).to.be.within(
@@ -187,9 +193,7 @@ describe('gdjs.NavMeshPathfindingBehavior', function () {
         // The destination is reached for every frame rate within 1/10 of second.
         expect(player.getX()).to.be(900);
         expect(player.getY()).to.be(300);
-        expect(pathFinding.pathFollower.destinationReached()).to.be(
-          true
-        );
+        expect(pathFinding.pathFollower.destinationReached()).to.be(true);
       });
     });
   });

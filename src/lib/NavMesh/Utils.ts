@@ -58,7 +58,11 @@ export function clamp(value: number, min: number, max: number) {
 /**
  * Check if two values are within a small margin of one another.
  */
-export function almostEqual(value1: number, value2: number, errorMargin = 0.0001) {
+export function almostEqual(
+  value1: number,
+  value2: number,
+  errorMargin = 0.0001
+) {
   if (Math.abs(value1 - value2) <= errorMargin) return true;
   else return false;
 }
@@ -84,7 +88,10 @@ export function areCollinear(line1: Line, line2: Line, errorMargin = 0.0001) {
   // by their points
   const area1 = triarea2(line1.start, line1.end, line2.start);
   const area2 = triarea2(line1.start, line1.end, line2.end);
-  if (almostEqual(area1, 0, errorMargin) && almostEqual(area2, 0, errorMargin)) {
+  if (
+    almostEqual(area1, 0, errorMargin) &&
+    almostEqual(area2, 0, errorMargin)
+  ) {
     return true;
   } else return false;
 }

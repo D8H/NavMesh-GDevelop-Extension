@@ -36,6 +36,9 @@ export default class Line {
 
   pointOnLine(x: number, y: number) {
     // Compare slope of line start -> xy to line start -> line end
-    return (x - this.left) * (this.bottom - this.top) === (this.right - this.left) * (y - this.top);
+    return (
+      (x - this.left) * (this.bottom - this.top) ===
+      (this.right - this.left) * (y - this.top)
+    );
   }
 }

@@ -8,7 +8,7 @@ import NavPoly from "./NavPoly";
  * @class NavGraph
  * @private
  */
- export default class NavGraph extends Graph<NavPoly> {
+export default class NavGraph extends Graph<NavPoly> {
   constructor(navPolygons: NavPoly[]) {
     super(navPolygons);
     this.nodes = navPolygons;

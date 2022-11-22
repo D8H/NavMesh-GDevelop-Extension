@@ -3,5 +3,5 @@
  * @module NavMeshGDevelopExtension
  */
 
- export { NavMeshPathfindingBehavior } from "./NavMeshPathfindingBehavior";
- export { NavMeshPathfindingObstacleBehavior } from "./NavMeshPathfindingObstacleBehavior";
+export { NavMeshPathfindingBehavior } from "./NavMeshPathfindingBehavior";
+export { NavMeshPathfindingObstacleBehavior } from "./NavMeshPathfindingObstacleBehavior";

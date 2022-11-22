@@ -33,7 +33,11 @@ export default class Polygon {
   public contains(x: number, y: number) {
     let inside = false;
 
-    for (let i = -1, j = this.points.length - 1; ++i < this.points.length; j = i) {
+    for (
+      let i = -1, j = this.points.length - 1;
+      ++i < this.points.length;
+      j = i
+    ) {
       const ix = this.points[i].x;
       const iy = this.points[i].y;
 
